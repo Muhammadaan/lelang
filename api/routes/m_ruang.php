@@ -16,16 +16,15 @@ function validasi($data, $custom = array())
 }
 
 
-
 /**
  * get user list
  */
-$app->get('/m_cabang/index', function ($request, $response) {
+$app->get('/m_ruang/index', function ($request, $response) {
     $params = $request->getParams();
     $db     = $this->db;
 
     $db->select("*")
-        ->from('m_cabang');
+        ->from('m_ruang');
     /** set parameter */
 
     /** Add filter */
@@ -63,7 +62,7 @@ $app->get('/m_cabang/index', function ($request, $response) {
 /**
  * create user
  */
-$app->post('/m_cabang/create', function ($request, $response) {
+$app->post('/m_ruang/create', function ($request, $response) {
     $data = $request->getParams();
     $db   = $this->db;
 
@@ -71,7 +70,7 @@ $app->post('/m_cabang/create', function ($request, $response) {
 
     if ($validasi === true) {
         try {
-            $model = $db->insert("m_cabang", $data);
+            $model = $db->insert("m_ruang", $data);
             return successResponse($response, $model);
         } catch (Exception $e) {
             return unprocessResponse($response, ['data gagal disimpan']);
@@ -85,7 +84,7 @@ $app->post('/m_cabang/create', function ($request, $response) {
 /**
  * update user
  */
-$app->post('/m_cabang/update', function ($request, $response) {
+$app->post('/m_ruang/update', function ($request, $response) {
     $data = $request->getParams();
     $db   = $this->db;
 
@@ -93,7 +92,7 @@ $app->post('/m_cabang/update', function ($request, $response) {
 
     if ($validasi === true) {
         try {
-            $model = $db->update("m_cabang", $data, array('id' => $data['id']));
+            $model = $db->update("m_ruang", $data, array('id' => $data['id']));
             return successResponse($response, $model);
         } catch (Exception $e) {
             return unprocessResponse($response, ['data gagal disimpan']);
@@ -105,23 +104,13 @@ $app->post('/m_cabang/update', function ($request, $response) {
 /**
  * delete user
  */
-$app->delete('/m_cabang/delete/{id}', function ($request, $response) {
+$app->delete('/m_ruang/delete/{id}', function ($request, $response) {
     $db = $this->db;
     try {
-        $delete = $db->delete('m_cabang', array('id' => $request->getAttribute('id')));
+        $delete = $db->delete('m_ruang', array('id' => $request->getAttribute('id')));
         return successResponse($response, ['data berhasil dihapus']);
     } catch (Exception $e) {
         return unprocessResponse($response, ['data gagal dihapus']);
     }
 });
 
-$app->get('/m_cabang/listcabang', function ($request, $response) {
-    $params = $request->getParams();
-    $db     = $this->db;
-
-    $db->select("*")
-        ->from('m_cabang');
-    $models    = $db->findAll();
-
-    return successResponse($response, $models);
-});

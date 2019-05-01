@@ -173,13 +173,8 @@ app.controller('rolesCtrl', function($scope, Data, toaster) {
         var akses = {
             "master_akses": false,
             "master_user": false,
-            "master_cabang": false,
-            // "master_satuan": false,
-            "master_kategori": false,
-            "master_barang": false,
-            "master_customer": false,
-
-            "transaksi_pemesanan": false,
+            "master_ruang": false,
+            "transaksi_peminjamanruang": false,
             "transaksi_kasir": false,
             "transaksi_penyesuain": false,
 

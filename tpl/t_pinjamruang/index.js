@@ -1,7 +1,7 @@
-app.controller("cabangCtrl", function($scope, Data, toaster) {
+app.controller("pijamruangCtrl", function($scope, Data, toaster) {
   var tableStateRef;
-  var control_link = "m_cabang";
-  $scope.judulcabang = "Master Cabang";
+  var control_link = "t_pinjamruang";
+  $scope.judulcabang = "Transaksi Peminjaman Ruangan";
   console.log($scope.title);
   $scope.formTitle = "";
   $scope.displayed = [];
@@ -39,18 +39,29 @@ app.controller("cabangCtrl", function($scope, Data, toaster) {
     });
   };
   /** get roles list */
-  $scope.getRoles = function() {
-    Data.get("approles/index").then(function(data) {
-      $scope.listHakakses = data.data.list;
+ 
+  $scope.getuser = function() {
+    Data.get("t_pinjamruang/getuser").then(function(data) {
+      $scope.listuser = data.data;
+      console.log($scope.listuser);
     });
   };
+
+  $scope.getruang = function() {
+    Data.get("t_pinjamruang/getruang").then(function(data) {
+      $scope.listruang = data.data;
+      console.log($scope.listuser);
+    });
+  };
+
   /** create */
   $scope.create = function(form) {
     $scope.is_edit = true;
     $scope.is_view = false;
     $scope.is_create = true;
     $scope.formtitle = "Form Tambah Data";
-    $scope.getRoles();
+    $scope.getuser();
+    $scope.getruang();
     $scope.form = {};
   };
   /** update */
@@ -58,10 +69,17 @@ app.controller("cabangCtrl", function($scope, Data, toaster) {
     $scope.is_edit = true;
     $scope.is_view = false;
     $scope.formtitle = "Edit Data : " + form.username;
-    $scope.getRoles();
     $scope.form = form;
     $scope.form.password = "";
   };
+
+    $scope.opened = {};
+  $scope.toggle = function ($event, elemId) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.opened[elemId] = !$scope.opened[elemId];
+    };
+
   /** view */
   $scope.view = function(form) {
     $scope.is_edit = true;
@@ -70,6 +88,7 @@ app.controller("cabangCtrl", function($scope, Data, toaster) {
     $scope.getRoles();
     $scope.form = form;
     $scope.form.password = "";
+     $scope.form.r_tgl_mulai   = form.r_tgl_mulai != null ? new Date(form.r_tgl_mulai) : undefined;
   };
   /** save action */
   $scope.save = function(form) {
@@ -96,6 +115,8 @@ app.controller("cabangCtrl", function($scope, Data, toaster) {
     $scope.is_edit = false;
     $scope.is_view = false;
   };
+
+
 
   $scope.trash = function(row) {
     swal(

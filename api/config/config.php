@@ -1,14 +1,14 @@
 <?php
 $config = [
-    'SITE_URL'      => 'http://localhost/web/kasir',
-    'SITE_IMG'      => 'http://localhost/web/kasir',
+    'SITE_URL'      => 'http://localhost/web/web_taufik',
+    'SITE_IMG'      => 'http://localhost/web/web_taufik',
     'PATH_IMG'      => '../img/',
     'DB'            => [
         'db' => [
             'DB_HOST'        => 'localhost',
             'DB_USER'        => 'root',
             'DB_PASS'        => 'landak1998',
-            'DB_NAME'        => 'belajar_kasir',
+            'DB_NAME'        => 'web_taufik',
             'DB_CHARSET'     => 'utf8',
             'CREATED_USER'   => 'created_by',
             'CREATED_TIME'   => 'created_at',

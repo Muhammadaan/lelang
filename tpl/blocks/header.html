@@ -8,10 +8,10 @@
         <div class="float-left" style="height: 69px;">
             <div class="left-150">
                 <h1 class="title-aplikasi">
-                Kasir
+               Sistem Lelang
                 </h1>
                 <h1 class="title-aplikasi">
-                  Kasir
+                    Sistem Lelang
                 </h1>
             </div>
 
@@ -114,103 +114,29 @@
                             <a ui-sref="master.user">
                                 <i class="glyphicon glyphicon-menu-right">
                                 </i>
-                                Pengguna
+                                User 
                             </a>
                         </li>
-                        <hr>
-                        <li ng-show="user.akses.master_cabang">
-                            <a ui-sref="master.cabang">
+                      <!--   <hr> -->
+                       <!--  <li ng-show="user.akses.master_ruang">
+                            <a ui-sref="master.ruang">
                                 <i class="glyphicon glyphicon-menu-right">
                                 </i>
-                                Cabang
-                            </a>
-                        </li>
-                        <!-- <li ng-show="user.akses.master_satuan">
-                            <a ui-sref="master.satuan">
-                                <i class="glyphicon glyphicon-menu-right">
-                                </i>
-                                Satuan
+                                Ruang
                             </a>
                         </li> -->
-
-                        <li ng-show="user.akses.master_customer">
-                            <a ui-sref="master.customer">
-                                <i class="glyphicon glyphicon-menu-right">
-                                </i>
-                              Customer
-                            </a>
-                        </li>
-                        <hr>
-                        <li ng-show="user.akses.master_kategori">
-                            <a ui-sref="master.kategori">
-                                <i class="glyphicon glyphicon-menu-right">
-                                </i>
-                                Kategori
-                            </a>
-                        </li>
-                        <li ng-show="user.akses.master_barang">
-                            <a ui-sref="master.barang">
-                                <i class="glyphicon glyphicon-menu-right">
-                                </i>
-                                Barang
-                            </a>
-                        </li>
+                       
                     </ul>
                 </li>
-                <!-- <li class="dropdown" ng-show="user.akses.transaksi_pembelian || user.akses.transaksi_penjualan || user.akses.transaksi_penyesuain " >
-                    <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button">
-                        <i class="glyphicon glyphicon-send icon text-info-lter">
-                        </i>
-                        Transaksi
-                        <span class="caret">
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li ng-show="user.akses.transaksi_pemesanan" >
-                            <a ui-sref="transaksi.pemesanan" >
-                                <i class="glyphicon glyphicon-menu-right">
-                                </i>
-                                Transaksi Pemesanan
-                            </a>
-                        </li>
-                        <li ng-show="user.akses.transaksi_kasir" >
-                            <a  ui-sref="transaksi.kasir" >
-                                <i class="glyphicon glyphicon-menu-right">
-                                </i>
-                                Transaksi Kasir
-                            </a>
-                        </li>
-                        <li ng-show="user.akses.transaksi_penyesuain">
-                            <a  ui-sref="transaksi.penyesuain" >
-                                <i class="glyphicon glyphicon-menu-right">
-                                </i>
-                                Transaksi Penyesuaian Stok
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
-
-                <li ng-show="user.akses.transaksi_pemesanan">
-                    <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button" ui-sref="transaksi.pemesanan">
+                
+                <li ng-show="user.akses.transaksi_peminjamanruang">
+                    <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button" ui-sref="transaksi.peminjamanruang">
                         <i class="glyphicon  glyphicon-duplicate icon text-info-lter">
                         </i>
-                          Transaksi Pemesanan
+                          Transaksi Lelang
                     </a>
                 </li>
-                <li ng-show="user.akses.transaksi_kasir">
-                    <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button" ui-sref="transaksi.kasir">
-                        <i class="glyphicon  glyphicon-usd icon text-info-lter">
-                        </i>
-                        Kasir
-                    </a>
-                </li>
-                <li ng-show="user.akses.transaksi_penyesuain">
-                    <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button" ui-sref="transaksi.penyesuain">
-                        <i class="glyphicon glyphicon-list-alt icon text-info-lter">
-                        </i>
-                      Transaksi Penyesuaian Stok
-                    </a>
-                </li>
+                
                 <li class="dropdown">
                     <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" role="button">
                         <i class="glyphicon glyphicon-print icon text-info-lter">

@@ -8,7 +8,8 @@
 function validasi($data, $custom = array())
 {
     $validasi = array(
-        'nama'       => 'required',
+        'user_id'       => 'required',
+        'ruang_id'       => 'required',
     );
 
     $cek = validate($data, $validasi, $custom);
@@ -16,16 +17,18 @@ function validasi($data, $custom = array())
 }
 
 
-
 /**
  * get user list
  */
-$app->get('/m_satuan/index', function ($request, $response) {
+$app->get('/t_pinjamruang/index', function ($request, $response) {
     $params = $request->getParams();
     $db     = $this->db;
 
-    $db->select("*")
-        ->from('m_satuan');
+    $db->select("t_pinjamruang.id,m_user.nama as nama_user,t_pinjamruang.is_deleted,t_pinjamruang.surat_pemohon")
+        ->from('t_pinjamruang')
+        ->join('left join', 'm_user', 't_pinjamruang.user_id = m_user.id');
+       
+
     /** set parameter */
 
     /** Add filter */
@@ -63,7 +66,7 @@ $app->get('/m_satuan/index', function ($request, $response) {
 /**
  * create user
  */
-$app->post('/m_satuan/create', function ($request, $response) {
+$app->post('/t_pinjamruang/create', function ($request, $response) {
     $data = $request->getParams();
     $db   = $this->db;
 
@@ -71,7 +74,8 @@ $app->post('/m_satuan/create', function ($request, $response) {
 
     if ($validasi === true) {
         try {
-            $model = $db->insert("m_satuan", $data);
+            $model = $db->insert("t_pinjamruang", $data);
+         
             return successResponse($response, $model);
         } catch (Exception $e) {
             return unprocessResponse($response, ['data gagal disimpan']);
@@ -85,7 +89,7 @@ $app->post('/m_satuan/create', function ($request, $response) {
 /**
  * update user
  */
-$app->post('/m_satuan/update', function ($request, $response) {
+$app->post('/t_pinjamruang/update', function ($request, $response) {
     $data = $request->getParams();
     $db   = $this->db;
 
@@ -93,7 +97,7 @@ $app->post('/m_satuan/update', function ($request, $response) {
 
     if ($validasi === true) {
         try {
-            $model = $db->update("m_satuan", $data, array('id' => $data['id']));
+            $model = $db->update("m_ruang", $data, array('id' => $data['id']));
             return successResponse($response, $model);
         } catch (Exception $e) {
             return unprocessResponse($response, ['data gagal disimpan']);
@@ -105,12 +109,35 @@ $app->post('/m_satuan/update', function ($request, $response) {
 /**
  * delete user
  */
-$app->delete('/m_satuan/delete/{id}', function ($request, $response) {
+$app->delete('/t_pinjamruang/delete/{id}', function ($request, $response) {
     $db = $this->db;
     try {
-        $delete = $db->delete('m_satuan', array('id' => $request->getAttribute('id')));
+        $delete = $db->delete('m_ruang', array('id' => $request->getAttribute('id')));
         return successResponse($response, ['data berhasil dihapus']);
     } catch (Exception $e) {
         return unprocessResponse($response, ['data gagal dihapus']);
     }
 });
+
+
+$app->get('/t_pinjamruang/getuser', function ($request, $response) {
+    $db     = $this->db;
+    // $params = $request->getParams();
+    $data   = $db->select('*')
+        ->from('m_user')
+        ->where('is_deleted', '=', 0)
+        ->findAll();
+    return successResponse($response, $data);
+});
+
+
+$app->get('/t_pinjamruang/getruang', function ($request, $response) {
+    $db     = $this->db;
+    // $params = $request->getParams();
+    $data   = $db->select('*')
+        ->from('m_ruang')
+        ->where('is_deleted', '=', 0)
+        ->findAll();
+    return successResponse($response, $data);
+});
+

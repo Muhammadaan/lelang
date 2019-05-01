@@ -1,7 +1,8 @@
-app.controller("pemesananCtrl", function($scope, Data, toaster) {
+app.controller("ruangCtrl", function($scope, Data, toaster) {
   var tableStateRef;
-  var control_link = "t_pemesanan";
-  $scope.title = "Transaksi Pemesanan";
+  var control_link = "m_ruang";
+  $scope.judulcabang = "Master Cabang";
+  console.log($scope.title);
   $scope.formTitle = "";
   $scope.displayed = [];
   $scope.form = {
@@ -38,114 +39,42 @@ app.controller("pemesananCtrl", function($scope, Data, toaster) {
     });
   };
   /** get roles list */
-
-
-  $scope.getcabang = function() {
-    Data.get("m_cabang/index").then(function(data) {
-      $scope.listcabang = data.data.list;
+  $scope.getRoles = function() {
+    Data.get("approles/index").then(function(data) {
+      $scope.listHakakses = data.data.list;
     });
   };
-
-  $scope.getcustomer = function(val) {
-      var param = { val: val };
-      Data.get("m_customer/get_customer", param).then(function(result) {
-          $scope.customer = result.data;
-          console.log(result.data);
-      });
-  };
-
-  $scope.getcustomer = function(val) {
-      var param = { val: val };
-      Data.get("m_customer/get_customer", param).then(function(result) {
-          $scope.customer = result.data;
-          console.log(result.data);
-      });
-  };
-
-  $scope.getbarang = function(val) {
-      var param = { val: val };
-      Data.get("m_barang/get_barang", param).then(function(result) {
-          $scope.barang = result.data;
-          console.log(result.data);
-      });
-  };
-
-
-  $scope.detBarang = [{}];
-  $scope.addDetailKon = function() {
-      var val = $scope.detBarang.length;
-      var newDet = {
-          nilai: ""
-      };
-      $scope.detBarang.push(newDet);
-  };
-
-  $scope.hitungTotal = function() {
-        // $scope.total_nilai = 0;
-        angular.forEach($scope.detBarang, function(val, key) {
-            // var jumlah = (val.qty == '') ? 0 : val.qty;
-            var jumlah = val.qty;
-            var harga = parseInt(val.harga_jual);
-            $scope.detBarang[key].total = jumlah * harga;
-        });
-
-    }
-
-    $scope.hitungLuas = function() {
-          // $scope.total_nilai = 0;
-          angular.forEach($scope.detBarang, function(val, key) {
-              // var jumlah = (val.qty == '') ? 0 : val.qty;
-              var panjang = parseInt(val.panjang);
-              var lebar = parseInt(val.lebar);
-              $scope.detBarang[key].luas = panjang * lebar;
-          });
-
-      }
-
-
-
-
   /** create */
   $scope.create = function(form) {
     $scope.is_edit = true;
     $scope.is_view = false;
     $scope.is_create = true;
     $scope.formtitle = "Form Tambah Data";
-    $scope.getcabang();
-
-
+    $scope.getRoles();
     $scope.form = {};
   };
   /** update */
   $scope.update = function(form) {
     $scope.is_edit = true;
     $scope.is_view = false;
-    $scope.formtitle = "Edit Data : " + form.nama;
-    $scope.getcabang();
-      $scope.getcustomer();
+    $scope.formtitle = "Edit Data : " + form.username;
+    $scope.getRoles();
     $scope.form = form;
-
+    $scope.form.password = "";
   };
   /** view */
   $scope.view = function(form) {
     $scope.is_edit = true;
     $scope.is_view = true;
-    $scope.formtitle = "Lihat Data : " + form.nama;
-    $scope.getcabang();
-      $scope.getcustomer();
+    $scope.formtitle = "Lihat Data : " + form.username;
+    $scope.getRoles();
     $scope.form = form;
-
+    $scope.form.password = "";
   };
   /** save action */
-  $scope.save = function(form,barang) {
-    var data = {
-        form: form,
-        detail: barang,
-
-    };
-    console.log(data);
+  $scope.save = function(form) {
     var url = form.id > 0 ? "/update" : "/create";
-    Data.post(control_link + url, data).then(function(result) {
+    Data.post(control_link + url, form).then(function(result) {
       if (result.status_code == 200) {
         $scope.is_edit = false;
         $scope.callServer(tableStateRef);

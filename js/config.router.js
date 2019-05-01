@@ -105,62 +105,18 @@ angular.module('app').config(
                     }
                 })
 
-                .state('master.cabang', {
-                    url: '/cabang',
-                    templateUrl: 'tpl/m_cabang/index.html',
+                .state('master.ruang', {
+                    url: '/ruang',
+                    templateUrl: 'tpl/m_ruang/index.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
                             function($ocLazyLoad) {
-                                return $ocLazyLoad.load('tpl/m_cabang/index.js');
+                                return $ocLazyLoad.load('tpl/m_ruang/index.js');
                             }
                         ]
                     }
                 })
-                .state('master.satuan', {
-                    url: '/satuan',
-                    templateUrl: 'tpl/m_satuan/index.html',
-                    resolve: {
-                        deps: ['$ocLazyLoad',
-                            function($ocLazyLoad) {
-                                return $ocLazyLoad.load('tpl/m_satuan/index.js');
-                            }
-                        ]
-                    }
-                })
-                .state('master.kategori', {
-                    url: '/kategori',
-                    templateUrl: 'tpl/m_kategori/index.html',
-                    resolve: {
-                        deps: ['$ocLazyLoad',
-                            function($ocLazyLoad) {
-                                return $ocLazyLoad.load('tpl/m_kategori/index.js');
-                            }
-                        ]
-                    }
-                })
-                .state('master.barang', {
-                    url: '/barang',
-                    templateUrl: 'tpl/m_barang/index.html',
-                    resolve: {
-                        deps: ['$ocLazyLoad',
-                            function($ocLazyLoad) {
-                                return $ocLazyLoad.load('tpl/m_barang/index.js');
-                            }
-                        ]
-                    }
-                })
-
-                .state('master.customer', {
-                    url: '/customer',
-                    templateUrl: 'tpl/m_customer/index.html',
-                    resolve: {
-                        deps: ['$ocLazyLoad',
-                            function($ocLazyLoad) {
-                                return $ocLazyLoad.load('tpl/m_customer/index.js');
-                            }
-                        ]
-                    }
-                })
+               
 
                 ////
 
@@ -169,13 +125,13 @@ angular.module('app').config(
                     templateUrl: 'tpl/app.html'
                 })
 
-                .state('transaksi.kasir', {
-                    url: '/kasir',
-                    templateUrl: 'tpl/t_kasir/index.html',
+                .state('transaksi.peminjamanruang', {
+                    url: '/pemohon',
+                    templateUrl: 'tpl/t_pinjamruang/index.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
                             function($ocLazyLoad) {
-                                return $ocLazyLoad.load('tpl/t_kasir/index.js');
+                                return $ocLazyLoad.load('tpl/t_pinjamruang/index.js');
                             }
                         ]
                     }
